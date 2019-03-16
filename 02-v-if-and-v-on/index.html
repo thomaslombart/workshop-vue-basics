@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>v-if & v-on</title>
+  </head>
+  <body>
+    <div id="app">
+      <button @click="makeMeAdmin">Make me admin</button>
+      <p v-if="admin">
+        You can see this sentence because you're an admin
+      </p>
+      <p v-else>
+        You're not an admin
+      </p>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="main.js"></script>
+  </body>
+</html>

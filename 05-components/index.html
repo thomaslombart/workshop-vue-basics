@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Components</title>
+  </head>
+
+  <body>
+    <div id="app">
+      <h2>Blog posts</h2>
+      <blog-post
+        v-for="(post, i) in posts"
+        :key="post.title"
+        :post="post"
+        :index="i"
+        @toggle="toggleRead"
+      ></blog-post>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="main.js"></script>
+  </body>
+</html>
