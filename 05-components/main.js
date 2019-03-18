@@ -7,7 +7,7 @@ Vue.component("blog-post", {
       <button @click="isDarkMode = !isDarkMode">{{ isDarkMode ? 'Lighten' : 'Darken' }} this post!</button>
       <h4>{{ post.title }}</h4>
       <small>{{ post.read ? 'Read' : 'Unread' }}</small>
-      <button @click="$emit('toggle', index)">Mark as {{ post.read ? 'Unread'  : 'Read' }}</button>
+      <button @click="sendToggleEvent">Mark as {{ post.read ? 'Unread'  : 'Read' }}</button>
       <p>{{ post.content }}</h4>
     </div>
   `,
@@ -16,6 +16,11 @@ Vue.component("blog-post", {
     return {
       isDarkMode: false
     };
+  },
+  methods: {
+    sendToggleEvent() {
+      this.$emit("toggle", this.index);
+    }
   }
 });
 
