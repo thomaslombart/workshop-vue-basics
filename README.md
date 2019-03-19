@@ -111,65 +111,61 @@ Take a look at the **Guardians of the Galaxy** example to see an implementation 
 
 So far, Vue has made our life simpler. The directives have a simple syntax and are easy to use. That's the same for creating components.
 
-```js
-Vue.component("my-component", {
-  template: "<div>My component</div>"
-});
-```
-
-As you can guess, we create a new component with `Vue.component`. The first parameter we give is the component **name** (`my-component` in our case). The second parameter is an object that defines your component. One property of this object is the **template** which is your component's HTML code. You can also use `data`, `methods` in your Vue components since they also are Vue instances!
+If you look at the JS file, you can see we that we create a new component with `Vue.component`. It allows us to register a component that we can use in other components. The first parameter we give is the component **name** (`blog-post` in our case). The second parameter is an object that defines your component. One property of this object is the **template** which is your component's HTML code. Of course, you can also use `data`, `methods` in these components since they also are Vue instances!
 
 You can then add your component in your app within your HTML code just like you were adding a simple element.
 
-To see an example of components and events, take a look at the code and analyze it.
+```html
+<blog-post />
+```
 
 **Notes**:
 
 - Be careful of where you define your component. If you define it after calling `new Vue()`, it won't work because it won't be properly registered.
 - You may have noticed that `data` is not an object but... a function that returns an object. Why? Well because of how JavaScript works, if `data` was an object, every instance of your component would **share the `data` property**. An immediate side effect is that if you have two `counter` components that has a `count` property, changing the `count` property on the first counter will **also change** the `count` of the second counter. In our case, changing the `isDarkMode` property would change it across all blog posts. That's not what we want. What we want is that `data` remain independent from other components. One way of doing so is by using functions.
 
-What's great about components is that you can reuse it as much as you want. You can see that we have created as many blog posts as there are posts in the `data` object.
+What's great about components is that you can reuse it as much as you want. You can see that we have created as many blog posts as there are posts in the `data` object thanks to the `v-for` directive.
 
 ### Props
 
-That's where components are really interesting. When you compose components across your app, you will have parent components and child components. Therefore, it's **essential** to communicate between components. One way of doing it is by using **props**. Props are used to communicate from the **parent to the child**.
+Maybe you wonder what is this `:post=post` in our main HTML code. That's a **prop** and that's where components are really interesting. Indeed, when you compose components across your app, you will have parent components and child components. Therefore, it's **essential** to communicate between components. One way of doing it is by using **props**. Props are used to communicate from the **parent to the child**.
 
 Here is how to use props:
 
-- On the child, set a `props` property. The value of `props` is an array containing all the props the parent gave to the child.
-- On the parent's template, give all the props you want into your component element:
+- On the child, you set a `props` property. The value of `props` is an array containing all the props the parent gave to the child. If you don't specify which props your child component will accept, it won't work. For example, if we forget to specify `post` in `blog-post`, our component will be broken.
+- On the parent's template, give all the props you want into your component element. In our case, our component has two props: `post` and `index`.
 
-```html
-<my-component key1="value" key2="another value"></my-component>
-```
+#### A note on `key`
 
-You can also **bind props** if you need to pass data that comes from your Vue instance.
+> Ah! You forgot to put `key` in the props!
 
-By passing a `props` property to our component, we passed data from the parent component to the child component.
+Well not, really. `key` is a special attribute. Indeed, Vue cares about your app's performance. So to be more efficient, if a change is made on a list's element, Vue will update the element in place instead of moving DOM elements to match the order of the items. Thus, Vue uses `key` to keep track of the elements. By default, Vue uses indexes to keep track of it so putting `:key=index` is redundant. But it's not ideal and can lead to conflicts.
 
-Be careful when you declare the props in your child component: You have to be exhaustive when you build your `props` array. If you forget just one prop, it won't work. Delete the `post` prop in the `blog-post` component and you'll see it disappear from the output.
+**So whenever, you use `v-for`, be sure to provide a unique `key` to it.**
 
 ### Custom events
 
-We know how to communicate from parent to child components. But how to communicate from child to parent components ?
+Now, you know what `:post="post"` refers to. And as you're curious, you are know wondering what is this `@toggle` thing? That's what we call a **custom event**.
 
-By using **custom events**. Just as with props, we have to define one thing on the parent and one thing on the child:
+In fact, we know how to communicate from parent to child components. But how can we communicate from child to parent components? By using **custom events**!
 
-- On the child, you have to use the `$emit` function. This function takes two parameters. The first one is required and is the **event name**. The second one is what you want to **send to the parent**. It can be an object, a string, an array, etc.
-- On the parent's template, use `v-on` (or `@`) to listen to the event your child will emit.
+Just as with props, we have to define one thing on the parent and one thing on the child:
+
+- On the child, you have to use the `$emit` function. The first parameter of this function is the **event name**. The others parameters are the data you want to send from the child to the parent. It can be an object, a string, an array, etc.
+- On the parent's template, we must listen to this event. Just as with the other regular event listeners such as `click`, we have to use `v-on` (or `@`) to do so.
 
 ```html
-<my-component @customEvent="handleChildEvent"></my-component>
+<blog-post @toggle="toggleRead"></blog-post>
 ```
 
 Let's see what happens when you mark one of the blog post as read.
 
-1. Click on `Mark as Read` on one of the blog posts.
+1. You click on `Mark as Read` on one of the blog posts.
 2. As there is a listener on the `click` event in the child component, the `sendToggleEvent` function is triggered
-3. In `sendToggleEvent`, the child emits a `toglge` event to the parent and transmits back the index that as been passed as a prop.
-4. The parent receives the `toggle` event from the child. The `toggleRead` method is triggered
-5. in this method, we set the `read` property of the corresponding to be false if it was true or to be true if it was false.
-6. As things are reactive, the child component (`blog-post`) gets its props `post` updated and the `read` property have been set to true.
+3. In `sendToggleEvent`, the child emits a `toggle` event to the parent and transmits back the index that as been passed as a prop. This index allows us to know which post have been marked as there are no unique identifiers associated to them.
+4. The parent receives the `toggle` event from the child. The `toggleRead` method is triggered.
+5. in this method, we set the `read` property of the corresponding post to be false if it was true or to be true if it was false.
+6. The `posts` property have been updated. Thus, as things are reactive, the child component (`blog-post`) gets its props `post` updated too! The post's `read` property is now set to true.
 
 ## Computed properties
 
@@ -177,13 +173,36 @@ Let's see what happens when you mark one of the blog post as read.
 
 I'm going to introduce you another feature of Vue before summing up all we've learnt: **computed properties**.
 
-Compared to a method, a computed property is **cached** based on its **dependencies**:
+In fact, if we take a look at our `blog-post` template in [05-components](./05-components/main.js). You can see that our template is a bit bloated because we've put ternary conditions in it and some additional logic with the numbers of words. It makes the template hard to maintain and complicated to read.
 
+Furthermore, what if we would want to display the number of words elsewhere in the template? Or to compute the read time from the number of words? That wouldn't be possible by putting it in the template. Luckily for us, there is a neat Vue feature called "Computed properties".
+
+To use them, we have to declare a `computed` object in the corresponding component. Then, you can add any functions you want in it and reference it in the dom. For example:
+
+```js
+computed: {
+  numberOfWords: function() {
+    return this.post.content.split(" ").length;
+  },
+  // ...
+}
+```
+
+**Notes**:
+
+- As your computed properties are mostly used in the DOM, they should return a result! So don't forget to use the `return` keyword.
+- When you use your computed properties in the DOM, you have to call it like a property, not as a function: `numberOfWords` instead of `numberOfWords()`
+
+You may think there's no really differences between a computed property or a method but there is. Indeed, compared to a method, a computed property is **cached** based on its **dependencies**. To understand what it means, you have to know this three things before:
+
+- Everytime there's a change in your app, Vue notifies its components and trigger what we call a **re-render**. This re-render allows us to update some parts of the DOM without rebuilding the entire page.
 - **Caching something** means storing a result somewhere temporarily (in the **cache**). The point of doing it is that this _somewhere_ can be accessed very fast!
 - **Dependencies** here means what the computed property **depends on**, what is used inside the implementation of the computed property. It has to be a **data property** or a **prop**.
 
-In our case, the dependency of the computed property is `this.movie.Poster`. So, as long as our `Poster` doesn't change, the **cached result will be returned** and we won't execute what's inside the computed property. However, if we use a method, the method will be **executed whenever the component re-renders!** no matter if `this.movie.Poster`changes or not.
+In our case, the dependency of the computed property is `this.post`. So, as long as our `post` doesn't change, the **cached result will be returned** and we won't execute what's inside the computed property. However, if we use a method, the method will be **executed whenever the component re-renders!** no matter if `this.post`changes or not. So, if you need to do an expensive computation, you must use a computed property to optimize the performance.
 
-EXPLAIN CODE HERE
+To sum up, a computed property **acts like a method**, **cache results** and allows us to make the template less bloated. It can be used in the template just like a **data property** and won't **necessarily be re-executed** at each re-render, just when its dependencies change.
 
-To sum up, a computed property, **acts like a method**, **cache results** if we use a **data property or a prop** in the implementation of the computed property (`this.movie.Poster` for example). It can be used in the template just like a **data property** and won't **necessarily be re-executed**.
+## To-Do App
+
+Wait, you thought I would explain how to build the entire to-do app here? It's your turn now. You have all the needed tools to do it! Good luck 👍
