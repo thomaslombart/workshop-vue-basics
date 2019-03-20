@@ -1,15 +1,24 @@
 Vue.component("blog-post", {
   template: `
-    <div 
-      :style="isDarkMode && 'color: white; background-color: black;'" 
-      style="padding: 2rem; border: 1px solid black; margin: 1rem 0"
+    <div
+      class="p-6 border rounded mt-6"
+      :class="isDarkMode ? 'bg-black text-grey-lighter' : 'bg-grey-lightest'"
     >
-      <button @click="isDarkMode = !isDarkMode">{{ isDarkMode ? 'Lighten' : 'Darken' }} this post!</button>
-      <h4>{{ post.title }}</h4>
-      <p>{{ post.content.split(" ").length }} words</p>
-      <small>{{ post.read ? 'Read' : 'Unread' }}</small>
-      <button @click="sendToggleEvent">Mark as {{ post.read ? 'Unread'  : 'Read' }}</button>
-      <p>{{ post.content }}</h4>
+      <button
+        class="font-bold py-2 px-4 rounded focus:outline-none mb-4"
+        :class="isDarkMode ? 'text-grey-darkest bg-grey-lightest hover:bg-white' : 'bg-grey-darkest hover:bg-black text-white'"
+        @click="isDarkMode = !isDarkMode"
+      >
+        {{ isDarkMode ? 'Lighten' : 'Darken' }} this post!
+      </button>
+      <h4 class="text-2xl">{{ post.title }}</h4>
+      <p class="text-sm">{{ post.content.split(" ").length }} words</p>
+      <small class="mt-3 text-bold text-base inline-block">{{ post.read ? 'Read' : 'Unread' }}</small>
+      <button
+        class="bg-blue ml-1 hover:bg-blue-dark text-white font-bold p-1 rounded focus:outline-none"        
+        @click="sendToggleEvent"
+      >Mark as {{ post.read ? 'Unread'  : 'Read' }}</button>
+      <p class="mt-3 leading-normal">{{ post.content }}</h4>
     </div>
   `,
   props: ["post", "index"],

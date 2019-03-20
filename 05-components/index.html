@@ -2,11 +2,15 @@
   <head>
     <meta charset="UTF-8" />
     <title>Components</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
   </head>
 
   <body>
-    <div id="app">
-      <h2>Blog posts</h2>
+    <div id="app" class="container mx-auto p-8 max-w-md">
+      <h2 class="text-3xl text-black font-bold">Blog posts</h2>
       <blog-post
         v-for="(post, i) in posts"
         :key="post.title"

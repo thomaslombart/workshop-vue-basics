@@ -2,12 +2,24 @@
   <head>
     <meta charset="UTF-8" />
     <title>Data & binding attributes</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <div id="app">
-      <p>My name is {{ name }}</p>
-      <input v-bind:placeholder="placeholder" />
-      <p :title="title">Hover me to see a message</p>
+    <div id="app" class="container mx-auto p-8 max-w-md">
+      <p class="text-2xl text-grey-darkest mb-4">My name is {{ name }}</p>
+      <input
+        class="border rounded w-full py-2 px-3 text-grey-darker focus:outline-none"
+        v-bind:placeholder="placeholder"
+      />
+      <p
+        class="text-xl mt-4 text-grey-darkest bg-grey-lighter p-4"
+        :title="title"
+      >
+        Hover me to see a message
+      </p>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="main.js"></script>

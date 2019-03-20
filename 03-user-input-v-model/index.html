@@ -2,16 +2,30 @@
   <head>
     <meta charset="UTF-8" />
     <title>User input with v-model</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
   </head>
 
   <body>
-    <div id="app">
-      <h2>Enter your name:</h2>
-      <div v-if="!hasEnteredName">
-        <input v-model="name" />
-        <button @click="checkName">Submit</button>
+    <div id="app" class="container mx-auto p-8 max-w-md">
+      <h2 class="text-3xl text-grey-darkest font-bold">Enter your name:</h2>
+      <div v-if="!hasEnteredName" class="flex mt-4">
+        <input
+          class="border rounded w-full py-2 px-3 text-grey-darker focus:outline-none"
+          v-model="name"
+        />
+        <button
+          class="bg-blue ml-3 text-2xl hover:bg-blue-dark text-white font-bold py-2 px-4 rounded"
+          @click="checkName"
+        >
+          Submit
+        </button>
       </div>
-      <p v-else>Hello {{ name }}!</p>
+      <p class="text-2xl mt-4 text-grey-darkest bg-grey-lighter p-4" v-else>
+        Hello {{ name }}!
+      </p>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="main.js"></script>
