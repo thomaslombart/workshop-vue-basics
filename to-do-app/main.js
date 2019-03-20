@@ -17,6 +17,7 @@ Vue.component("todo-item", {
           type="text" 
           v-model="editedTodo" 
           @keyup.enter="edit"
+          @keyup.esc="isEditing = false"
         />
         <svg 
           @click="$emit('delete', index)" 
