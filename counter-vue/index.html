@@ -3,30 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <title>Counter Vue</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
+    <link href="../app.css" rel="stylesheet" />
   </head>
   <body>
-    <div
-      id="app"
-      class="container mx-auto p-8 flex justify-center items-center max-w-md"
-    >
-      <button
-        class="bg-blue text-2xl hover:bg-blue-dark text-white font-bold py-2 px-4 rounded"
-        @click="counter--"
-      >
-        -1
-      </button>
-      <p class="text-3xl ml-4 mr-4">{{ counter }}</p>
-      <button
-        class="bg-blue text-2xl hover:bg-blue-dark text-white font-bold py-2 px-4 rounded"
-        @click="counter++"
-      >
-        +1
-      </button>
-      <p class="ml-4 text-red" v-if="counter < 0">Negative</p>
+    <div id="app" class="container">
+      <button class="btn" @click="counter--">-1</button>
+      <p class="text">{{ counter }}</p>
+      <button class="btn" @click="counter++">+1</button>
+      <p class="text" v-if="counter < 0">Negative</p>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="main.js"></script>

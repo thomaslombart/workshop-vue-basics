@@ -3,26 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <title>Counter Vanilla</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
+    <link href="../app.css" rel="stylesheet" />
   </head>
-  <body class="container mx-auto p-8 flex justify-center items-center max-w-md">
-    <button
-      class="bg-blue text-2xl hover:bg-blue-dark text-white font-bold py-2 px-4 rounded"
-      id="decrement"
-    >
-      -1
-    </button>
-    <p class="text-3xl ml-4 mr-4" id="counter">0</p>
-    <button
-      class="bg-blue text-2xl hover:bg-blue-dark text-white font-bold py-2 px-4 rounded"
-      id="increment"
-    >
-      +1
-    </button>
-    <p class="ml-4 text-red" id="sign">Negative</p>
+  <body class="container">
+    <button class="btn" id="decrement">-1</button>
+    <p class="text" id="counter">0</p>
+    <button class="btn" id="increment">+1</button>
+    <p class="text" id="sign"></p>
     <script src="main.js"></script>
   </body>
 </html>

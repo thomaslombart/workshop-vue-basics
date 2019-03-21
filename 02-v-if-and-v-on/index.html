@@ -2,23 +2,17 @@
   <head>
     <meta charset="UTF-8" />
     <title>v-if & v-on</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
+    <link href="../app.css" rel="stylesheet" />
   </head>
   <body>
-    <div id="app" class="container mx-auto p-8 max-w-md">
-      <button
-        class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded focus:outline-none"
-        @click="makeMeAdmin"
-      >
+    <div id="app" class="container">
+      <button class="btn" @click="makeMeAdmin">
         Make me admin
       </button>
-      <p class="text-2xl text-grey-darkest mt-4" v-if="admin">
+      <p class="text" v-if="admin">
         You can see this sentence because you're an admin
       </p>
-      <p class="text-2xl text-grey-darkest mt-4" v-else>
+      <p class="text" v-else>
         You're not an admin
       </p>
     </div>

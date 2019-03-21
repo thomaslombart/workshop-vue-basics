@@ -2,36 +2,32 @@
   <head>
     <meta charset="UTF-8" />
     <title>Lists with v-for</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
+    <link href="../app.css" rel="stylesheet" />
   </head>
 
   <body>
-    <div id="app" class="container mx-auto p-8 max-w-md">
-      <h2 class="text-3xl text-black font-bold">
+    <div id="app" class="container">
+      <h2 class="text text-list">
         Things I want to buy:
       </h2>
-      <ul class="list-reset mt-5">
-        <li v-for="thing in things" :key="thing" class="text-black mt-1">
+      <ul class="list">
+        <li v-for="thing in things" :key="thing" class="list-item-small">
           {{ thing }}
         </li>
       </ul>
 
-      <h2 class="text-3xl text-black font-bold mt-4">
+      <h2 class="text text-list">
         Guardians of the Galaxy
       </h2>
       <div
         v-for="(character, index) in characters"
         :key="`${character.name}-${index}`"
-        class="mt-5"
+        class="list-item"
       >
-        <h3 class="text-grey-darkest">Guardian n°{{ index + 1 }} :</h3>
+        <h3 class="">Guardian n°{{ index + 1 }} :</h3>
         <p
           v-for="(information, key) in character"
           :key="`${information}-${index}`"
-          class="mt-1"
         >
           {{ key }}: {{ information }}
         </p>

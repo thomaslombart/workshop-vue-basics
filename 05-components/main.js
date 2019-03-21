@@ -1,24 +1,20 @@
 Vue.component("blog-post", {
   template: `
-    <div
-      class="p-6 border rounded mt-6"
-      :class="isDarkMode ? 'bg-black text-grey-lighter' : 'bg-grey-lightest'"
-    >
+    <div class="post" :class="{'post-dark': isDarkMode}">
       <button
-        class="font-bold py-2 px-4 rounded focus:outline-none mb-4"
-        :class="isDarkMode ? 'text-grey-darkest bg-grey-lightest hover:bg-white' : 'bg-grey-darkest hover:bg-black text-white'"
+        class="btn btn-post"
+        :class="{'btn-post-dark': isDarkMode}"
         @click="isDarkMode = !isDarkMode"
       >
         {{ isDarkMode ? 'Lighten' : 'Darken' }} this post!
       </button>
-      <h4 class="text-2xl">{{ post.title }}</h4>
-      <p class="text-sm">{{ post.content.split(" ").length }} words</p>
-      <small class="mt-3 text-bold text-base inline-block">{{ post.read ? 'Read' : 'Unread' }}</small>
-      <button
-        class="bg-blue ml-1 hover:bg-blue-dark text-white font-bold p-1 rounded focus:outline-none"        
-        @click="sendToggleEvent"
-      >Mark as {{ post.read ? 'Unread'  : 'Read' }}</button>
-      <p class="mt-3 leading-normal">{{ post.content }}</h4>
+      <h4 class="title title-post">{{ post.title }}</h4>
+      <p class="text-small">{{ post.content.split(" ").length }} words</p>
+      <small class="text-small">{{ post.read ? 'Read' : 'Unread' }}</small>
+      <button class="btn btn-small" @click="sendToggleEvent">
+        Mark as {{ post.read ? 'Unread'  : 'Read' }}
+      </button>
+      <p class="text text-post">{{ post.content }}</h4>
     </div>
   `,
   props: ["post", "index"],
