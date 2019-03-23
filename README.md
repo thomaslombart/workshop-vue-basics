@@ -205,4 +205,25 @@ To sum up, a computed property **acts like a method**, **cache results** and all
 
 ## To-Do App
 
+It's time to practice. Your task is to write a to-do app whose features are the following:
+
+**Basic**:
+
+- I can view my tasks
+- I can add a new task in my to-do list
+- I can mark a task as done and the other way round
+
+**Intermediate**:
+
+- I can edit a task
+- I can delete a task
+
+**Advanced**:
+
+- I can filter my tasks depending on their status (all tasks, active tasks, done taks)
+- I can save my tasks in the `localStorage`. For that, you would need to take a look at the [lifecycle hooks](https://vuejs.org/v2/guide/instance.html#Instance-Lifecycle-Hooks) and [watchers](https://vuejs.org/v2/guide/computed.html#Watchers)
+- I have implemented a design in my app
+
+If you've finished the basic tasks, you can do the intermediate tasks. And if you've finished the intermediate one, well try the advanced tasks.
+
 Wait, you thought I would explain how to build the entire to-do app here? It's your turn now. You have all the needed tools to do it! Good luck 👍
