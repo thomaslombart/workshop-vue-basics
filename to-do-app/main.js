@@ -67,6 +67,17 @@ new Vue({
     filters: ["all", "active", "done"],
     currentFilter: "all"
   },
+  mounted() {
+    const localTodos = localStorage.getItem("vue-todos");
+    if (localTodos) {
+      this.todos = JSON.parse(localTodos);
+    }
+  },
+  watch: {
+    todos() {
+      localStorage.setItem("vue-todos", JSON.stringify(this.todos));
+    }
+  },
   computed: {
     filteredTodos() {
       switch (this.currentFilter) {
