@@ -74,8 +74,11 @@ new Vue({
     }
   },
   watch: {
-    todos() {
-      localStorage.setItem("vue-todos", JSON.stringify(this.todos));
+    todos: {
+      handler() {
+        localStorage.setItem("vue-todos", JSON.stringify(this.todos));
+      },
+      deep: true
     }
   },
   computed: {

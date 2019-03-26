@@ -19,16 +19,9 @@
       <h2 class="text text-list">
         Guardians of the Galaxy
       </h2>
-      <div
-        v-for="(character, index) in characters"
-        :key="`${character.name}-${index}`"
-        class="list-item"
-      >
-        <h3 class="">Guardian n°{{ index + 1 }} :</h3>
-        <p
-          v-for="(information, key) in character"
-          :key="`${information}-${index}`"
-        >
+      <div v-for="(character, index) in characters" class="list-item">
+        <h3>Guardian n°{{ index + 1 }} :</h3>
+        <p v-for="(information, key) in character">
           {{ key }}: {{ information }}
         </p>
       </div>

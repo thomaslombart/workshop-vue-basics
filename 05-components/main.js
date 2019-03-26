@@ -25,7 +25,7 @@ Vue.component("blog-post", {
   },
   methods: {
     sendToggleEvent() {
-      this.$emit("toggle", this.index, "hey");
+      this.$emit("toggle", this.index);
     }
   }
 });

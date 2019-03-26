@@ -6,7 +6,7 @@ Vue.component("blog-post", {
         :class="{'btn-post-dark': isDarkMode}"
         @click="isDarkMode = !isDarkMode"
       >
-        {{ darkModeText }} this post!
+        {{ darkModeText }}
       </button>
       <h4 class="title title-post">{{ post.title }}</h4>
       <p class="text-small">{{ numberOfWords }} words</p>
@@ -28,7 +28,7 @@ Vue.component("blog-post", {
       return this.post.content.split(" ").length;
     },
     darkModeText: function() {
-      return this.isDarkMode ? "Lighten" : "Darken";
+      return `${this.isDarkMode ? "Lighten" : "Darken"} this post!`;
     },
     readText: function() {
       return this.post.read ? "Read" : "Unread";

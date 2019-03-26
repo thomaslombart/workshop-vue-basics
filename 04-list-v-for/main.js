@@ -1,7 +1,7 @@
 new Vue({
   el: "#app",
   data: {
-    things: ["New video game", "Piano", "Car", "House"],
+    things: ["New video game", "Piano", "Tesla", "House"],
     characters: [
       {
         name: "Groot",
