@@ -14,7 +14,7 @@ Vue.component("blog-post", {
       <button  class="btn btn-small" @click="$emit('toggle', index)">
         Mark as {{ reversedReadText }}
       </button>
-      <p class="text text-post">{{ post.content }}</h4>
+      <p class="text text-post">{{ post.content }}</p>
     </div>
   `,
   props: ["post", "index"],
