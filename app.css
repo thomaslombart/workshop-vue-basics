@@ -10,6 +10,12 @@ html {
   padding: 2rem;
 }
 
+@media screen and (max-width: 900px) {
+  .container {
+    max-width: 75%;
+  }
+}
+
 .title {
   font-size: 2rem;
   color: #22292f;
