@@ -58,7 +58,7 @@ Here is the syntax : `v-on:event="method"` or the shorthand `@event="method"`.
 
 If you come from a React background, this is similar to `onClick`, `onChange`, etc. There are similar events in Vue.js : `click`, `keyup`, `input`, ...
 
-But what methods am I about? In Vue, just like in React, you can add methods to your component. You do it so by providing to the Vue instance a `methods` object just like you've done it with `data`.
+But what methods am I talking about? In Vue, just like in React, you can add methods to your component. You do it so by providing to the Vue instance a `methods` object just like you've done it with `data`.
 
 When you click on the button _Make me admin_, you attached the `click` event to your `button` and you're telling Vue to trigger the `makeMeAdmin` method everytime you'll click the button.
 
