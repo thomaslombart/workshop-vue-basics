@@ -47,18 +47,6 @@ Vue.component("todo-item", {
   }
 });
 
-Vue.component("filter-todo", {
-  template: `
-    <li 
-      class="rounded-full uppercase px-2 py-1 text-xs font-bold mr-2 cursor-pointer" 
-      :class="active ? 'bg-blue-dark text-white' : 'bg-grey-lighter text-grey-darker'"
-    >
-      <slot></slot>
-    </li>
-  `,
-  props: ["active"]
-});
-
 new Vue({
   el: "#app",
   data: {

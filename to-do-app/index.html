@@ -34,13 +34,14 @@
         No to-dos!
       </p>
       <ul class="list-reset flex mt-3">
-        <filter-todo
+        <li
           v-for="filter in filters"
-          @click.native="currentFilter = filter"
-          :active="currentFilter === filter"
+          @click="currentFilter = filter"
+          class="rounded-full uppercase px-2 py-1 text-xs font-bold mr-2 cursor-pointer"
+          :class="currentFilter === filter ? 'bg-blue-dark text-white' : 'bg-grey-lighter text-grey-darker'"
         >
           {{ filter }}
-        </filter-todo>
+        </li>
       </ul>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
