@@ -203,6 +203,14 @@ In our case, the dependency of the computed property is `this.post`. So, as long
 
 To sum up, a computed property **acts like a method**, **cache results** and allows us to make the template less bloated. It can be used in the template just like a **data property** and won't **necessarily be re-executed** at each re-render, just when its dependencies change.
 
+## Watchers
+
+**In that part, refer to the code at [07-watchers](./07-watchers).**
+
+**A watcher allows you to spy one data property and runs a function when that property changes**. You may think it's similar as a computed property, but it's not.
+
+A computed property computes a new property based on one ore more reactive properties and returns a new value. However, a watcher only runs a function for a particular reactive property. No need to return something.
+
 ## To-Do App
 
 It's time to practice. Your task is to write a to-do app whose features are the following:
