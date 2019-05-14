@@ -1,6 +1,7 @@
 Vue.component("counter", {
   template: `
     <div>
+      <h2 class="title">First counter</h2>
       <button class="btn btn-small" @click="count++">+1</button>
       <p>{{ count }}</p>
     </div>`,
@@ -56,6 +57,7 @@ Vue.component("counter", {
 Vue.component("local-storage-counter", {
   template: `
     <div>
+      <h2 class="title">Local storage counter</h2>
       <button class="btn btn-small" @click="count++">+1</button>
       <p>{{ count }}</p>
     </div>

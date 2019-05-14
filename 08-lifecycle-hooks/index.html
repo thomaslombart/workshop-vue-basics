@@ -7,7 +7,11 @@
 
   <body>
     <div id="app" class="container">
-      <button class="btn btn-small" @click="mustDestroy = true">
+      <button
+        class="btn btn-small"
+        @click="mustDestroy = true"
+        v-if="!mustDestroy"
+      >
         Destroy first counter
       </button>
       <counter style="margin-top: 10px;" v-if="!mustDestroy"></counter>
