@@ -211,11 +211,43 @@ To sum up, a computed property **acts like a method**, **cache results** and all
 
 You can use watchers for **side effects**, that is to say things that happen outside of your component, in the **outside** world such as asynchronous tasks (fetching data from a server), manipulating browser APIS (with localStorage), etc.
 
+A watcher must be declared in a `watch` object and have this format:
+
+```js
+WATCHER_NAME(value, oldValue) {
+
+}
+```
+
+In the example, we have created a watcher on the counter property. If you increment the counter, you'll see that we log a sentence saying: _The count has changed, it's now 1_. We'll see a watcher use-case later.
+
 ## Lifecycle hooks
+
+**In that part, refer to the code at [08-lifecycle-hooks](./08-lifecycle-hooks).**
+
+Just like humans do, a Vue instance (that includes components) goes through a list of steps while it lives. Indeed, a component can be created, updated, destroyed, etc. Vue makes it possible for you to hook into these steps to add some code. For example, you may want to retrieve the profile of a user when you create the `profile` component or remove event listeners when a component is destroyed to prevent memory leaks.
+
+Here are the different lifecycle hooks that are run in the right order: `beforeCreate`, `created`, `beforeMount`, `mounted`, `beforeUpdate`, `updated`, `beforeDestroy`, `destroyed`.
+
+To better understand the purpose of these lifecycle hooks, you can take a look at the console logs while you run the app. The `beforeCreate`, `created`, `beforeMount` and `mounted` have been run. They are necessary in order to initialize your app.
+
+Now, increment the first counter. Because `counter` is a reactive data, `beforeUpdate` and `updated` hooks have been run.
+
+If you click on `Destroy first counter`, this will cause the `mustDestroy` property to be `false` and to make the `counter` component disappear. Thus, the `beforeDestroy` and `destroyed` hooks will be run.
 
 Here is a great recap from the official [Vue docs](https://vuejs.org/v2/guide/instance.html):
 
 ![Lifecycle hooks](./lifecycle.png)
+
+### Lifecycle hooks and watchers use case
+
+The component called `local-storage-counter` shows how you can use both watchers and lifecycle hooks to enable an auto-save feature in your browser.
+
+Increment the first counter and reload the page. The counter's value have been reset. Now increment the local storage counter and reload the page. The counter's value have been saved.
+
+Thanks to the `count` watcher, you save your `count` value to the `localStorage` each time it changes. Then, during the component's initialization, you just have to take the `count` value back saved to the `localStorage` (if it exists) and put it in the `count` data.
+
+We do this retrieval in the `created` hook because it happens earlier than `mounted` and has nothing to do with the DOM. The earlier, the better.
 
 ## To-Do App
 
