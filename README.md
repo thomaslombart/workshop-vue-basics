@@ -207,9 +207,15 @@ To sum up, a computed property **acts like a method**, **cache results** and all
 
 **In that part, refer to the code at [07-watchers](./07-watchers).**
 
-**A watcher allows you to spy one data property and runs a function when that property changes**. You may think it's similar as a computed property, but it's not.
+**A watcher allows you to spy one data property and runs a function when that property changes**. You may think it's similar as a computed property, but it's not. Indeed, a computed property **computes** a new property based on one ore more reactive properties and returns a new value.
 
-A computed property computes a new property based on one ore more reactive properties and returns a new value. However, a watcher only runs a function for a particular reactive property. No need to return something.
+You can use watchers for **side effects**, that is to say things that happen outside of your component, in the **outside** world such as asynchronous tasks (fetching data from a server), manipulating browser APIS (with localStorage), etc.
+
+## Lifecycle hooks
+
+Here is a great recap from the official [Vue docs](https://vuejs.org/v2/guide/instance.html):
+
+![Lifecycle hooks](./lifecycle.png)
 
 ## To-Do App
 
