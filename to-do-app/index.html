@@ -2,24 +2,16 @@
   <head>
     <meta charset="UTF-8" />
     <title>To-Do App</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
+    <link href="style.css" rel="stylesheet" />
   </head>
 
   <body>
-    <div id="app" class="container mx-auto p-8 md:w-1/2">
-      <h2 class="text-3xl text-grey-darkest uppercase tracking-wide">
+    <div id="app">
+      <h2 class="title">
         To-Do App
       </h2>
-      <input
-        v-model="nextTodo"
-        class="mt-4 mb-4 p-3 bg-grey-lighter outline-none w-full rounded leading-tight"
-        @keyup.enter="addTodo"
-        placeholder="Type your task here"
-      />
-      <ul class="list-reset" v-if="filteredTodos.length">
+      <todo-input @addtodo="addTodo"></todo-input>
+      <ul class="list-todo" v-if="filteredTodos.length">
         <todo-item
           v-for="(todo, i) in filteredTodos"
           :key="`${todo.name}-${i}`"
@@ -30,19 +22,14 @@
           @edit="editItem"
         ></todo-item>
       </ul>
-      <p v-else class="text-center m-8 text-2xl font-bold text-grey-darker">
+      <p v-else class="no-results">
         No to-dos!
       </p>
-      <ul class="list-reset flex mt-3">
-        <li
-          v-for="filter in filters"
-          @click="currentFilter = filter"
-          class="rounded-full uppercase px-2 py-1 text-xs font-bold mr-2 cursor-pointer"
-          :class="currentFilter === filter ? 'bg-blue-dark text-white' : 'bg-grey-lighter text-grey-darker'"
-        >
-          {{ filter }}
-        </li>
-      </ul>
+      <todo-filters
+        class="filters"
+        @changeCurrentFilter="changeCurrentFilter"
+        :currentFilter="currentFilter"
+      ></todo-filters>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="main.js"></script>
