@@ -6,7 +6,7 @@ new Vue({
   },
   methods: {
     checkName() {
-      if (this.name !== "" && this.name.length > 2) {
+      if (this.name !== "" && this.name.length >= 2) {
         this.hasEnteredName = true;
       }
     }
